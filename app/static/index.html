@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10172b">
+    <meta name="description" content="One conversation. A team of specialist agents. You stay in control.">
+    <title>One Request, Many Actions</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="/" aria-label="One Request, Many Actions home">
+          <span class="brand-mark">✳</span>
+          <span><strong>many actions</strong><small>PERSONAL WORKFLOW AI</small></span>
+        </a>
+        <div class="nav-label">WORKSPACE</div>
+        <button class="nav-item active" type="button"><span class="nav-icon">◈</span> Assistant</button>
+        <a class="nav-item" href="/docs" target="_blank" rel="noreferrer"><span class="nav-icon">⌘</span> API explorer <span class="external">↗</span></a>
+        <div class="sidebar-divider"></div>
+        <div class="nav-label">YOUR AGENT TEAM <span id="agent-count" class="count">8</span></div>
+        <div id="agent-list" class="agent-list" aria-label="Available specialist agents"></div>
+        <div class="sidebar-spacer"></div>
+        <div class="privacy-card">
+          <div class="privacy-icon">⌑</div>
+          <strong>Your data stays local</strong>
+          <p>Demo records are stored in a local SQLite database. No real accounts are connected.</p>
+        </div>
+        <div class="profile">
+          <div class="avatar">Y</div>
+          <div><strong>Local demo</strong><small id="mode-label">Offline agent mode</small></div>
+          <span class="online-dot"></span>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="crumb"><span>Workspace</span><span class="crumb-slash">/</span><strong>Assistant</strong></div>
+          <div class="top-actions">
+            <span class="connection"><i></i> <span id="connection-label">Checking connection</span></span>
+            <a class="icon-button" href="/docs" target="_blank" rel="noreferrer" aria-label="Open API docs">↗</a>
+          </div>
+        </header>
+
+        <section class="conversation-layout">
+          <div class="conversation-column">
+            <div class="welcome">
+              <div class="eyebrow"><span class="sparkle">✳</span> YOUR PERSONAL WORKFLOW ASSISTANT</div>
+              <h1>One request.<br><span>Many actions.</span></h1>
+              <p class="welcome-copy">Tell me what you need. I’ll coordinate the right specialists, work through the steps, and bring everything back in one clear plan.</p>
+              <div class="welcome-proof"><span class="proof-icon">⌁</span> Your team works together. You stay in control.</div>
+            </div>
+
+            <div id="conversation" class="conversation" aria-live="polite"></div>
+
+            <div class="composer-area">
+              <div class="suggestion-heading">NOT SURE WHERE TO START? <span>TRY A REQUEST</span></div>
+              <div class="suggestions">
+                <button class="suggestion" type="button" data-prompt="Help me prepare for my trip, check the budget, and organize my tasks."><span class="suggestion-icon travel">↗</span><span><strong>Get trip-ready</strong><small>Budget, itinerary &amp; prep</small></span><span class="suggest-arrow">→</span></button>
+                <button class="suggestion" type="button" data-prompt="Plan affordable dinners and make a shopping list within my budget."><span class="suggestion-icon meals">⌂</span><span><strong>Plan my meals</strong><small>Recipes &amp; grocery list</small></span><span class="suggest-arrow">→</span></button>
+                <button class="suggestion" type="button" data-prompt="Review my inbox and turn anything important into tasks."><span class="suggestion-icon inbox">✉</span><span><strong>Clear my inbox</strong><small>Actions &amp; follow-ups</small></span><span class="suggest-arrow">→</span></button>
+                <button class="suggestion" type="button" data-prompt="Check my family appointments and simplify my tasks into clear steps."><span class="suggestion-icon family">♡</span><span><strong>Coordinate my day</strong><small>Appointments &amp; next steps</small></span><span class="suggest-arrow">→</span></button>
+              </div>
+              <form id="composer" class="composer">
+                <label class="sr-only" for="request-input">What would you like help with?</label>
+                <textarea id="request-input" name="request" rows="1" maxlength="4000" placeholder="Ask for anything — your agents will figure out the rest..." required></textarea>
+                <div class="composer-footer">
+                  <span class="composer-hint"><span>↵</span> Press Enter to send · Shift + Enter for a new line</span>
+                  <button class="send-button" type="submit" aria-label="Send request"><span>Coordinate workflow</span><span class="send-icon">↑</span></button>
+                </div>
+              </form>
+              <div class="disclaimer"><span>ⓘ</span> Demo uses sample data. No email is sent, purchase is made, bill is paid, or booking is changed.</div>
+            </div>
+          </div>
+
+          <aside class="right-rail">
+            <div class="rail-card status-card">
+              <div class="rail-card-heading"><span class="rail-icon">◉</span><span>AGENT NETWORK</span><span class="live-pill"><i></i> READY</span></div>
+              <div class="network-visual">
+                <div class="network-orbit orbit-one"></div><div class="network-orbit orbit-two"></div>
+                <div class="network-node node-center">✳</div>
+                <div class="network-node node-a">▣</div><div class="network-node node-b">⌂</div>
+                <div class="network-node node-c">◷</div><div class="network-node node-d">✉</div>
+              </div>
+              <div class="network-caption"><strong>1 coordinator</strong><span>connecting 8 specialist agents</span></div>
+              <div class="network-footer"><span><i class="legend-dot coordinator-dot"></i> Coordinator</span><span><i class="legend-dot specialist-dot"></i> Specialists</span></div>
+            </div>
+            <div class="rail-card trust-card">
+              <div class="trust-top"><span class="trust-icon">◇</span><span>BUILT FOR TRUST</span></div>
+              <div class="trust-item"><span class="check">✓</span><span><strong>Transparent by design</strong><small>See every agent and tool call</small></span></div>
+              <div class="trust-item"><span class="check">✓</span><span><strong>You stay in control</strong><small>External actions are never taken</small></span></div>
+              <div class="trust-item"><span class="check">✓</span><span><strong>Honest about demo data</strong><small>Sample records are labeled</small></span></div>
+            </div>
+            <div class="challenge-note"><span class="amazon-mark">a</span><span><strong>Alexa+ style experience</strong><small>Independent hackathon demo · Not an official Alexa+ integration</small></span></div>
+          </aside>
+        </section>
+      </main>
+    </div>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>
