@@ -1,0 +1,3 @@
+[console_scripts]
+one-request-mcp = app.mcp_server:main
+one-request-mcp-inspect = app.mcp_client:main
