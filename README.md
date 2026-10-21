@@ -54,6 +54,8 @@ python -m app.mcp_server
 
 Open [http://127.0.0.1:8000](http://127.0.0.1:8000). The API is documented at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs), and the MCP endpoint is `http://127.0.0.1:8001/mcp`.
 
+The MCP URL is a protocol endpoint, not a webpage. A browser may show `404` at `/` or `406 Not Acceptable: Client must accept text/event-stream` at `/mcp`; that is expected for ordinary browser requests. Verify MCP using an MCP-compatible client or the included `python -m app.mcp_client --call-budget` command.
+
 Example prompts:
 
 - “Prepare my trip, check the budget, and organize my tasks.”

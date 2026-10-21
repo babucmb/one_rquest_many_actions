@@ -153,7 +153,7 @@ The project initializes the SQLite schema and seeds example data on first startu
 | API readiness check | [http://127.0.0.1:8000/ready](http://127.0.0.1:8000/ready) |
 | MCP endpoint for clients | `http://127.0.0.1:8001/mcp` |
 
-**Do not browse to the MCP server's `/` path.** It is not a website and can return `404`. The MCP route is `/mcp`; MCP clients communicate with it using the MCP protocol. A browser visit to `/mcp` may also not render a useful page.
+**Do not use a browser to test the MCP endpoint.** The MCP route is `/mcp`, but it speaks the MCP Streamable HTTP protocol, not HTML. A browser GET to `/` can return `404`; a browser GET to `/mcp` can return `406 Not Acceptable: Client must accept text/event-stream`. That 406 is expected when a regular browser does not send the protocol's required `Accept` header; it does not mean the MCP server is broken. Verify the endpoint with an MCP-compatible client or `python -m app.mcp_client --call-budget`.
 
 ### Try an end-to-end request
 
@@ -387,9 +387,9 @@ Use `$env:AGENT_MODE = "demo"` to run without credentials. ADK mode requires a v
 
 From the project root, activate `.venv` and run `python -m pip install -e ".[dev]"`. Confirm `python --version` is 3.11 or later and that the active interpreter is `.venv\Scripts\python.exe`.
 
-### MCP endpoint appears broken in a browser
+### MCP endpoint returns 404 or 406 in a browser
 
-MCP is a protocol, not an HTML webpage. Use an MCP client or `python -m app.mcp_client`; do not judge the protocol by opening its endpoint as a regular web page.
+MCP is a protocol, not an HTML webpage. A request to `/` can return `404`, and a browser request to `/mcp` can return `406 Not Acceptable: Client must accept text/event-stream` because the browser is not making an MCP Streamable HTTP request. This is expected. Use an MCP client or `python -m app.mcp_client --call-budget` to test the protocol.
 
 ## 11. Security and production readiness
 

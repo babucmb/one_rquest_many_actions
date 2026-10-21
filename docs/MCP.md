@@ -72,6 +72,8 @@ python -m app.mcp_server
 
 Configure a client to `http://127.0.0.1:8001/mcp`. The repository includes both HTTP and optional stdio entries in `.vscode/mcp.json`. The HTTP entry connects to this server; start it separately before connecting.
 
+Do not test this URL by opening it in a normal browser. The root path is not served, and a browser GET to `/mcp` may return `406 Not Acceptable: Client must accept text/event-stream`. Streamable HTTP requires the MCP client's protocol headers and session handling; use an MCP-compatible client or the included `python -m app.mcp_client --call-budget` command instead.
+
 ### Optional stdio client
 
 For clients that launch MCP servers as subprocesses, start a server over stdio:
@@ -107,4 +109,3 @@ python -m pytest tests/test_mcp.py -q
 ## Security and deployment boundary
 
 The MCP service refuses non-loopback Streamable HTTP binding. This protects a development demo; it is **not** production authentication. Do not expose the service, the REST API, or the SQLite database publicly. Remote deployment needs a separately reviewed authentication/authorization gateway, TLS, origin and DNS-rebinding protections, rate limiting, privacy controls, and deployment operations. Do not put secrets in the checked-in VS Code MCP config.
-
