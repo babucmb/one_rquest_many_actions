@@ -192,5 +192,12 @@ def test_persisted_meal_plan_approvals_reminders_and_drafts(client: TestClient) 
 
 
 def test_homepage_and_openapi_are_served(client: TestClient) -> None:
-    assert "One request" in client.get("/").text
+    homepage = client.get("/").text
+    assert "One request" in homepage
+    assert 'id="showcase-button"' in homepage
+    assert "story-card" in homepage
+    assert "Agent Skill" in homepage
+    assert "Streamable HTTP" in homepage
+    assert client.get("/static/styles.css").status_code == 200
+    assert client.get("/static/app.js").status_code == 200
     assert client.get("/openapi.json").status_code == 200
