@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#10172b">
-    <meta name="description" content="One conversation. A team of specialist agents. You stay in control.">
+    <meta name="theme-color" content="#f4f0ff">
+    <meta name="description" content="One request becomes a transparent workflow across specialist agents.">
     <title>One Request, Many Actions</title>
     <link rel="stylesheet" href="/static/styles.css">
   </head>
@@ -46,10 +46,18 @@
         <section class="conversation-layout">
           <div class="conversation-column">
             <div class="welcome">
-              <div class="eyebrow"><span class="sparkle">✳</span> YOUR PERSONAL WORKFLOW ASSISTANT</div>
-              <h1>One request.<br><span>Many actions.</span></h1>
-              <p class="welcome-copy">Tell me what you need. I’ll coordinate the right specialists, work through the steps, and bring everything back in one clear plan.</p>
-              <div class="welcome-proof"><span class="proof-icon">⌁</span> Your team works together. You stay in control.</div>
+              <div class="eyebrow"><span class="sparkle">✳</span> ONE REQUEST, MANY ACTIONS</div>
+              <h1>One goal.<br><span>A team that gets it done.</span></h1>
+              <p class="welcome-copy">Skip the app-hopping. Tell us the outcome you want and a coordinator brings the right specialists together, handles dependencies, and shows you what happened.</p>
+              <div class="welcome-proof"><span class="proof-icon">⌁</span> One conversation → coordinated specialists → one clear plan.</div>
+              <div class="showcase-actions">
+                <button id="showcase-button" class="showcase-button" type="button">
+                  <span class="showcase-play">▶</span>
+                  <span><strong>See the idea in action</strong><small>Run a 3-agent trip and budget workflow</small></span>
+                  <span class="showcase-arrow">→</span>
+                </button>
+                <span class="showcase-caption">A live local demo · no API key needed</span>
+              </div>
             </div>
 
             <div id="conversation" class="conversation" aria-live="polite"></div>
@@ -85,6 +93,21 @@
               </div>
               <div class="network-caption"><strong>1 coordinator</strong><span>connecting 8 specialist agents</span></div>
               <div class="network-footer"><span><i class="legend-dot coordinator-dot"></i> Coordinator</span><span><i class="legend-dot specialist-dot"></i> Specialists</span></div>
+            </div>
+            <div class="rail-card story-card">
+              <div class="story-eyebrow">THE IDEA</div>
+              <h2>Life doesn't fit in one app.</h2>
+              <p>One goal can touch travel, money, and your to-do list. Our coordinator joins those dots instead of making you do it.</p>
+              <div class="story-flow" aria-label="One request passes through a coordinator to relevant specialists and returns as a clear plan">
+                <span class="story-step"><b>01</b><strong>Say the goal</strong><small>One natural request</small></span>
+                <span class="story-connector" aria-hidden="true"></span>
+                <span class="story-step"><b>02</b><strong>Agents coordinate</strong><small>Right work, right order</small></span>
+                <span class="story-connector" aria-hidden="true"></span>
+                <span class="story-step"><b>03</b><strong>See the plan</strong><small>Results and trace</small></span>
+              </div>
+              <div class="challenge-pills" aria-label="Hackathon technology">
+                <span>Agent Skill</span><span>MCP</span><span>Streamable HTTP</span>
+              </div>
             </div>
             <div class="rail-card trust-card">
               <div class="trust-top"><span class="trust-icon">◇</span><span>BUILT FOR TRUST</span></div>

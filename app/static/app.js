@@ -3,6 +3,18 @@ const conversation = document.querySelector("#conversation");
 const form = document.querySelector("#composer");
 const input = document.querySelector("#request-input");
 const sendButton = form.querySelector("button[type=submit]");
+const showcaseButton = document.querySelector("#showcase-button");
+const showcasePrompt = "Prepare my trip, check the budget, and organize my tasks.";
+const agentLabels = {
+  planning: "Everyday Planner",
+  inbox: "Inbox-to-Action",
+  meals: "Meal & Shopping",
+  finance: "Budget Organizer",
+  travel: "Travel Coordinator",
+  business: "Business Operations",
+  family: "Family Coordinator",
+  accessibility: "Clear Steps"
+};
 
 function element(tag, className, text) {
   const node = document.createElement(tag);
@@ -37,6 +49,7 @@ async function loadAgents() {
   document.querySelector("#agent-count").textContent = String(agents.length);
   agents.forEach((agent, index) => {
     const row = element("div", "agent-link");
+    row.dataset.agentId = agent.id;
     const dot = element("span", "agent-dot");
     dot.style.setProperty("--agent-color", agentColors[index % agentColors.length]);
     row.append(dot, element("span", "", agent.name));
@@ -50,28 +63,51 @@ function addUserMessage(text) {
 
 function showLoading() {
   const card = element("div", "result-card");
-  const head = element("div", "result-head", "✳  COORDINATING YOUR REQUEST");
+  const head = element("div", "result-head", "✳  YOUR COORDINATOR IS ON IT");
   const dots = element("span", "loading-dots");
   dots.setAttribute("aria-label", "Agents working");
   [0, 1, 2].forEach(() => dots.append(element("i")));
   head.append(dots);
   card.append(head);
-  card.append(element("div", "result-text", "Finding the right specialists and organizing the work…"));
+  card.append(element("div", "result-text", "Matching your goal to the right specialists and organizing the work…"));
   conversation.append(card);
   return card;
 }
 
+function updateAgentActivity(results = []) {
+  const completed = new Map();
+  results.forEach(result => {
+    const agentId = String(result.agent || "").replace(/_specialist$/, "");
+    if (agentLabels[agentId]) completed.set(agentId, "error" in result ? "failed" : "completed");
+  });
+  document.querySelectorAll(".agent-link").forEach(row => {
+    const state = completed.get(row.dataset.agentId);
+    row.classList.toggle("agent-completed", state === "completed");
+    row.classList.toggle("agent-failed", state === "failed");
+    if (state) row.setAttribute("aria-label", `${agentLabels[row.dataset.agentId]} ${state}`);
+    else row.removeAttribute("aria-label");
+  });
+}
+
 function renderWorkflow(workflow, card) {
   card.replaceChildren();
+  updateAgentActivity(workflow.agents);
   document.querySelector("#mode-label").textContent = workflow.mode === "google_adk"
     ? "Google ADK · Gemini"
     : "Offline demo mode";
   const head = element("div", "result-head", `✳  ${workflow.mode === "google_adk" ? "GOOGLE ADK AGENT TEAM" : "OFFLINE DEMO AGENT TEAM"}`);
   const statusText = workflow.status === "completed" ? "COMPLETE" : workflow.status.toUpperCase();
   head.append(element("span", "result-state", statusText));
+  const agentCount = workflow.agents?.length || 0;
+  const traceCount = workflow.events?.length || 0;
+  const meta = element(
+    "div",
+    "workflow-meta",
+    `${agentCount} specialist${agentCount === 1 ? "" : "s"} · ${traceCount} trace events · ${workflow.mode === "google_adk" ? "Gemini" : "local demo data"}`
+  );
   const answer = element("div", "result-text");
   answer.append(element("p", "", workflow.response || "No final response was returned."));
-  card.append(head, answer);
+  card.append(head, meta, answer);
 
   if (workflow.agents?.length) {
     const summaries = element("div", "trace-list");
@@ -121,6 +157,7 @@ function showError(card, message) {
 
 async function submitRequest(text) {
   if (!text.trim()) return;
+  updateAgentActivity();
   addUserMessage(text.trim());
   input.value = "";
   sendButton.disabled = true;
@@ -147,6 +184,8 @@ form.addEventListener("submit", event => {
   event.preventDefault();
   submitRequest(input.value);
 });
+
+showcaseButton.addEventListener("click", () => submitRequest(showcasePrompt));
 
 input.addEventListener("keydown", event => {
   if (event.key === "Enter" && !event.shiftKey) {
