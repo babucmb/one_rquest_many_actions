@@ -157,11 +157,11 @@ The project initializes the SQLite schema and seeds example data on first startu
 
 ### Try an end-to-end request
 
-In the web app, submit:
+For the quickest presentation, select **See the idea in action**. This submits the built-in trip, budget, and planning request and demonstrates the three relevant specialists. You can also submit the same request manually:
 
 > Prepare my trip, check the budget, and organize my tasks.
 
-In demo mode, the app should coordinate travel, finance, and planning, then display their results and execution trace. All displayed trip and budget information is sample data.
+In demo mode, the app should coordinate travel, finance, and planning, then display their results and execution trace. The project-story panel explains the problem, coordination idea, and Alexa+ track technologies. All displayed trip and budget information is sample data.
 
 Other example requests:
 

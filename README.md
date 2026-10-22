@@ -27,6 +27,7 @@ The track asks for a **working MCP integration** using **Agent Skills** and **St
 - Real MCP client integration test that initializes a client, lists server tools, and invokes a tool.
 - Persistent local meal plans and shopping lists, reminders, appointments, message/family/business drafts, and trip-change approvals. Trip edits are applied to demo data only after explicit approval; nothing is sent, purchased, paid, booked, or delivered.
 - A responsive interface with execution traces, suggested requests, local-system status, and clear demo-mode disclosure.
+- A project-story panel that explains the cross-app coordination problem, hackathon technology, and local demo boundaries; the “See the idea in action” button runs the multi-agent showcase request.
 
 ## Run on Windows
 
@@ -62,6 +63,8 @@ Example prompts:
 - “Plan affordable dinners and make a shopping list within my budget.”
 - “Review my inbox and turn anything important into tasks.”
 - “Check my family appointments and simplify my tasks into clear steps.”
+
+For the presentation flow, open the app and select **See the idea in action**. It runs the trip, budget, and planning workflow, then displays the participating specialists and trace. The interface also explains the project idea and its Agent Skill/MCP/Streamable HTTP components without suggesting real service integrations.
 
 The default `AGENT_MODE=auto` selects Google ADK when `GOOGLE_API_KEY` is configured; otherwise it selects the explicitly labeled offline demo planner. To require demo mode, set `AGENT_MODE=demo`. To require Gemini mode, set `AGENT_MODE=adk` and configure `GOOGLE_API_KEY` in `.env`; the MCP server must also be running. `GOOGLE_MODEL` selects the ADK model. Do not commit `.env`.
 
